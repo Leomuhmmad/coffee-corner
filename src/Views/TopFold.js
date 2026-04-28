@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import "./TopFold.css";
 import { FaPlay, FaShoppingCart, FaBars } from "react-icons/fa";
+import VideoModal from "../components/VideoModal";
 
 const TopFold = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [showVideo, setShowVideo] = useState(false); // Changed from true to false
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleWatchVideo = () => {
-    setIsPlaying(true);
-    // Add your video logic here
-    console.log("Playing video...");
+  const openVideo = () => {
+    setShowVideo(true);
+  };
+
+  const closeVideo = () => {
+    setShowVideo(false);
   };
 
   return (
@@ -30,9 +33,7 @@ const TopFold = () => {
           <a href="#">Home</a>
           <a href="#">About</a>
           <a href="#">Menu</a>
-          <a href="#">Shop</a>
-          <a href="#">Pages ▾</a>
-          <a href="#">Reservation</a>
+          <a href="#">Contact</a>
         </nav>
 
         <div className="topfold-right">
@@ -40,48 +41,39 @@ const TopFold = () => {
             <FaShoppingCart />
             <span className="dot"></span>
           </div>
-
           <div className="menu-btn" onClick={toggleMenu}>
             <FaBars />
           </div>
         </div>
       </header>
 
-      {/* HERO SECTION */}
-      <section className="hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
-            Enjoy Your <span>Coffee</span> Time
-          </h1>
-
-          <p className="hero-subtitle">
-            Discover the best coffee experience with premium beans and cozy atmosphere.
-          </p>
-
-          <div className="cta-buttons">
-            <button className="watch-btn" onClick={handleWatchVideo}>
-              <FaPlay />
-              <div>
-                <span>Watch Video</span>
-                <small>1 minute</small>
-              </div>
-            </button>
-          </div>
+      {/* Hero Section */}
+      <div className="hero-section">
+        <div className="hero-title">
+          {`{ automate everything. }`}
+        </div>        
+        <p className="hero-subtitle">
+          Based in San Francisco, Webcafe AI creates and invests in AI and SaaS solutions.
+        </p>
+        <div className="cta-buttons">
+          <button className="watchdemo-btn" onClick={openVideo}>
+            <FaPlay className="play-icon" />
+            <div className="demo-text">
+              <span className="investment-text">Open Demo</span>
+              <span className="demo-duration"></span>
+            </div>
+          </button>
         </div>
-      </section>
+      </div>
 
-      {/* Optional: Video Modal */}
-      {isPlaying && (
-        <div className="video-modal" onClick={() => setIsPlaying(false)}>
-          <div className="video-modal-content">
-            <button className="close-btn" onClick={() => setIsPlaying(false)}>×</button>
-            <video controls autoPlay>
-              <source src="your-video-url.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-      )}
+      {/* Video Modal */}
+      <VideoModal 
+        show={showVideo}
+        onClose={closeVideo}
+        videoId="XQg009mDWag"
+        title="First Maneuver Shakes Ring Rust"
+        description="Watch Seth Rollins' recovery as he lands his first high-impact move."
+      />
     </>
   );
 };
