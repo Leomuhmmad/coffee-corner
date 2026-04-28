@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import HomePage from './Views/HomePage';
+import './App.css';
 
 function App() {
   return (
@@ -9,4 +9,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
